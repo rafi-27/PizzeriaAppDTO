@@ -51,10 +51,20 @@ class Controlador{
         //return listaPizza.filter { pizza:PizzaDTO -> pizza.precio in min .. max }//explicita
     }
 
+    //Segundo metodo:
     fun filtradoDeIngredientes(listaAlergenos:List<String>,listaIngredientes:List<Ingrediente>):List<Ingrediente>{
-        return listaIngredientes.filter { it.alergenos != listaAlergenos }
+        return listaIngredientes.filter {it.alergenos.none() {it in listaAlergenos} }
     }
     //return ingredientes.filter {!it.alergenos.listIterator().equals(listaIngredientesAlergenos.listIterator())}
+
+    //Tercer metodo:
+    fun ordenarPizzasPrecio(orden:String,listaPizzillas:List<PizzaDTO>):List<PizzaDTO>{
+        return listaPizzillas.sortedBy {orden.equals("ASC") }
+    }
+
+
+
+
 
 }
 
