@@ -29,10 +29,16 @@ fun main(){
     var control:Controlador = Controlador()
 
     //Probamos flitrado por precios:
+    println("Filtramos por precio: ")
     println(control.filtradoDePizzas(listaPizzas))
+    println("-----------------------------------------------------------------------------------------")
+
 
     //Probamos filtrado por alergenos:
-    println(control.filtradoDeIngredientes(listaAlergenos,listaPizzas))
+    println("Filtramos ingredientes que podemos consumir: ")
+    println(control.filtradoDeIngredientes(listaAlergenos,listaingr))
+    println("-----------------------------------------------------------------------------------------")
+
 
 
 
@@ -45,9 +51,10 @@ class Controlador{
         //return listaPizza.filter { pizza:PizzaDTO -> pizza.precio in min .. max }//explicita
     }
 
-    fun filtradoDeIngredientes(listaIngredientesAlergenos:List<String>,ingredientes:List<Ingrediente>):List<PizzaDTO>{
-        return ingredientes.filter {}
+    fun filtradoDeIngredientes(listaAlergenos:List<String>,listaIngredientes:List<Ingrediente>):List<Ingrediente>{
+        return listaIngredientes.filter { it.alergenos != listaAlergenos }
     }
+    //return ingredientes.filter {!it.alergenos.listIterator().equals(listaIngredientesAlergenos.listIterator())}
 
 }
 
