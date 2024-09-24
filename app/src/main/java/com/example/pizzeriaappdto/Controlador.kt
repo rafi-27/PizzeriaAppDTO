@@ -40,6 +40,13 @@ fun main(){
     println("-----------------------------------------------------------------------------------------")
 
 
+    //Probamos filtrado por alergenos:
+    println("Filtramos Precios ASC: ")
+    println(control.ordenarPizzasPrecio("ASC",listaPizzas))
+    println("Filtramos Precios DESC: ")
+    println(control.ordenarPizzasPrecio("DESC",listaPizzas))
+    println("-----------------------------------------------------------------------------------------")
+
 
 
 }
@@ -53,14 +60,19 @@ class Controlador{
 
     //Segundo metodo:
     fun filtradoDeIngredientes(listaAlergenos:List<String>,listaIngredientes:List<Ingrediente>):List<Ingrediente>{
-        return listaIngredientes.filter {it.alergenos.none() {it in listaAlergenos} }
+        return listaIngredientes.filter{!it.alergenos.all { it in listaAlergenos }}
     }
-    //return ingredientes.filter {!it.alergenos.listIterator().equals(listaIngredientesAlergenos.listIterator())}
+    //Otras formas de hacerlo la que uso en mi punto de vista es la mas sencilla.
+    //return listaIngredientes.filter{it.alergenos.all { it !in listaAlergenos }}
+    //return listaIngredientes.filter {it.alergenos.none() {it in listaAlergenos} }
 
     //Tercer metodo:
     fun ordenarPizzasPrecio(orden:String,listaPizzillas:List<PizzaDTO>):List<PizzaDTO>{
-        return listaPizzillas.sortedBy {orden.equals("ASC") }
+        if (orden.equals("ASC")) return listaPizzillas.sortedBy { it.precio } else return listaPizzillas.sortedByDescending { it.precio }
+        //return listaPizzillas.sortedBy {orden.equals("ASC") }
     }
+
+    //Cuarto metodo:
 
 
 
