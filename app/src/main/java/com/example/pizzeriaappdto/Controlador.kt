@@ -8,10 +8,10 @@ fun main(){
     //Lista con pizzas ingredientes y alergenos
     val listaPizzas:List<PizzaDTO> = mutableListOf(
         PizzaDTO(1,"Pizza Atuzn",9.0,SIZE.GRANDE, listOf(Ingrediente(1,"Atun", listOf("Gluten")))),
-        PizzaDTO(2,"Pizza Marisocos",5.0,SIZE.PEQUEÑA, listOf(Ingrediente(2,"Gamba", listOf("Cancer")),Ingrediente(3,"Salmon", listOf("Calcio")))),
+        PizzaDTO(2,"Pizza Marisocos",5.0,SIZE.PEQUEÑA, listOf(Ingrediente(2,"A", listOf("Cancer")),Ingrediente(3,"Salmon", listOf("Calcio")))),
         PizzaDTO(7,"Pizza Kebab",10.0,SIZE.MEDIANA, listOf(Ingrediente(5,"kebab", listOf("Gluten")),Ingrediente(5,"salsaPicante", listOf("AlergenoUno")))),
-        PizzaDTO(3,"Pizza Atun",15.0,SIZE.GRANDE, listOf(Ingrediente(1,"AtunTomate", listOf("Gludame")))),
-        PizzaDTO(4,"Pizza Atuzn",6.0,SIZE.GRANDE, listOf(Ingrediente(1,"Atun", listOf("Glutoma"))))
+        PizzaDTO(3,"Pizza Atun",15.0,SIZE.GRANDE, listOf(Ingrediente(1,"Gamba", listOf("Gludame")))),
+        PizzaDTO(4,"Pizza Atuzn",6.0,SIZE.GRANDE, listOf(Ingrediente(1,"Gamba", listOf("Glutoma"))))
         )
 
     //Cliente no puede comer ingreditnes con estos alergenos:
@@ -47,7 +47,11 @@ fun main(){
     println(control.ordenarPizzasPrecio("DESC",listaPizzas))
     println("-----------------------------------------------------------------------------------------")
 
-
+    //Probamos contar pizzas
+    println("Porbamos haber cuantas pizzas tienen un ingrediente que le pasas: ")
+    println(control.contarPizzasPorIngrediente("Gamba",listaPizzas))
+    println(control.contarPizzasPorIngrediente("Atun",listaPizzas))
+    println(control.contarPizzasPorIngrediente("kebab",listaPizzas))
 
 }
 
@@ -72,8 +76,11 @@ class Controlador{
         //return listaPizzillas.sortedBy {orden.equals("ASC") }
     }
 
-    //Cuarto metodo:
-
+    //Cuarto metodo:Contador de pizzas. Contar pizzas que tengan un ingrediente concreto //pasado por parámetro.
+    fun contarPizzasPorIngrediente(ingre:String,listaPizzasAFiltrar:List<PizzaDTO>):Int{
+        return listaPizzasAFiltrar.filter {it.listaIngredientesPizza.all { it.nombre.equals(ingre) }}.count()
+    }
+    //return listaPizzasAFiltrar.filter {it.listaIngredientesPizza.all { it.nombre.equals(ingre) }}.count()
 
 
 
