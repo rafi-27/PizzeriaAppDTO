@@ -78,13 +78,10 @@ class Controlador{
 
     //Cuarto metodo:Contador de pizzas. Contar pizzas que tengan un ingrediente concreto //pasado por parámetro.
     fun contarPizzasPorIngrediente(ingre:String,listaPizzasAFiltrar:List<PizzaDTO>):Int{
-        return listaPizzasAFiltrar.filter {it.listaIngredientesPizza.all { it.nombre.equals(ingre) }}.count()
+        return  listaPizzasAFiltrar.filter {it.listaIngredientesPizza.any { it.nombre.equals(ingre) }}.count()
     }
+    // listaPizzasAFiltrar.filter {it.listaIngredientesPizza.all { it.nombre.equals(ingre) }}.count()
     //return listaPizzasAFiltrar.filter {it.listaIngredientesPizza.all { it.nombre.equals(ingre) }}.count()
-
-
-
-
 }
 
 
