@@ -30,7 +30,7 @@ fun main(){
 
     //Probamos flitrado por precios:
     println("Filtramos por precio: ")
-    println(control.filtradoDePizzas(listaPizzas))
+    println(control.filtradoDePizzas(listaPizzas,10,12))
     println("-----------------------------------------------------------------------------------------")
 
 
@@ -83,7 +83,3 @@ class Controlador{
     // listaPizzasAFiltrar.filter {it.listaIngredientesPizza.all { it.nombre.equals(ingre) }}.count()
     //return listaPizzasAFiltrar.filter {it.listaIngredientesPizza.all { it.nombre.equals(ingre) }}.count()
 }
-
-
-
-
