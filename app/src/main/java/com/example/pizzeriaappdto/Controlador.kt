@@ -77,7 +77,7 @@ fun main() {
             "Pizza Atuzn",
             6.0,
             SIZE.GRANDE,
-            listOf(Ingrediente(1, "Gamba", listOf("Glutoma")))
+            listOf(Ingrediente(1, "Gamba", listOf("Glutoma")),Ingrediente(1, "Kebab", listOf("Cancer", "Gluten")),Ingrediente(1, "Kebab", listOf("Cancer", "Gluten")))
         )
     )
 
@@ -119,9 +119,15 @@ fun main() {
 
     //Probamos contar pizzas
     println("Porbamos haber cuantas pizzas tienen un ingrediente que le pasas: ")
-    println(control.contarPizzasPorIngrediente(listaingr.get(1), listaPizzas))
+    println(control.contarPizzasPorIngrediente(listaingr.get(0), listaPizzas))
     println(control.contarPizzasPorIngrediente(listaingr.get(3), listaPizzas))
     println(control.contarPizzasPorIngrediente(listaingr.get(2), listaPizzas))
+
+    //Probamos contar pizzas
+    println("Otra forma: ")
+    println(control.contarPizzasPorIngredienteDos(listaingr[0], listaPizzas))
+    println(control.contarPizzasPorIngredienteDos(listaingr[1], listaPizzas))
+    println(control.contarPizzasPorIngredienteDos(listaingr[2], listaPizzas))
 
 }
 
@@ -156,9 +162,12 @@ class Controlador {
     }
 
     //Cuarto metodo:Contador de pizzas. Contar pizzas que tengan un ingrediente concreto //pasado por parámetro.
-    fun contarPizzasPorIngrediente(ingre: Ingrediente, listaPizzasAFiltrar: List<PizzaDTO>): Int {
+    fun contarPizzasPorIngredienteDos(ingre: Ingrediente, listaPizzasAFiltrar: List<PizzaDTO>): Int {
         return listaPizzasAFiltrar.filter { it.listaIngredientesPizza.any { it.nombre.equals(ingre.nombre, ignoreCase = true) } }
             .count()
+    }
+    fun contarPizzasPorIngrediente(ingre: Ingrediente, listaPizzasAFiltrar: List<PizzaDTO>): Int {
+        return listaPizzasAFiltrar.filter {it.listaIngredientesPizza.contains(ingre) }.count()
     }
     /**
      * fun contarPizzasPorIngrediente(ingre: String, listaPizzasAFiltrar: List<PizzaDTO>): Int {
