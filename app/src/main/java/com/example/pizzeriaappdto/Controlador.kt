@@ -144,6 +144,9 @@ class Controlador {
      * es decir, no puede contener ninguno. Sin embargo, tu función (not all), permite que con que no
      * contenga todos los alérgenos, entra en el filtrado. La solución correcta es la del none, que la tienes comentada abajo.
      */
+
+    //Cambiar parametro para pasarle una lista de alergenos***********
+
     fun filtradoDeIngredientes(
         listaAlergenos: List<String>,
         listaIngredientes: List<Ingrediente>
