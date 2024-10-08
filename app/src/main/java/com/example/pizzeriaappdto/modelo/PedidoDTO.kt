@@ -1,7 +1,6 @@
-package com.example.pizzeriaappdto.modulo
+package com.example.pizzeriaappdto.modelo
 
 import java.time.LocalDateTime
-import java.util.Date
 
 data class PedidoDTO(
         val id:Int,

@@ -1,4 +1,4 @@
-package com.example.pizzeriaappdto.modulo
+package com.example.pizzeriaappdto.modelo
 
 data class PizzaDTO(
     val id:Int,

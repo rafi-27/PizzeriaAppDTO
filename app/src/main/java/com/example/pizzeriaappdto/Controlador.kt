@@ -1,15 +1,14 @@
 package com.example.pizzeriaappdto
 
 import android.os.Build
-import android.view.PixelCopy
 import androidx.annotation.RequiresApi
-import com.example.pizzeriaappdto.modulo.ClienteDTO
-import com.example.pizzeriaappdto.modulo.EstadoPedido
-import com.example.pizzeriaappdto.modulo.Ingrediente
-import com.example.pizzeriaappdto.modulo.LineaPedidoDTO
-import com.example.pizzeriaappdto.modulo.PedidoDTO
-import com.example.pizzeriaappdto.modulo.PizzaDTO
-import com.example.pizzeriaappdto.modulo.SIZE
+import com.example.pizzeriaappdto.modelo.ClienteDTO
+import com.example.pizzeriaappdto.modelo.EstadoPedido
+import com.example.pizzeriaappdto.modelo.Ingrediente
+import com.example.pizzeriaappdto.modelo.LineaPedidoDTO
+import com.example.pizzeriaappdto.modelo.PedidoDTO
+import com.example.pizzeriaappdto.modelo.PizzaDTO
+import com.example.pizzeriaappdto.modelo.SIZE
 import java.time.LocalDateTime
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -18,22 +17,16 @@ fun main() {
     //Probamos Instanciar objetos para comprobar que almacenan los datos:
     val listaPedidos= mutableListOf<PedidoDTO>()
 
-    val primerPedido=PedidoDTO(2, LocalDateTime.now(),45.0,EstadoPedido.CANCELADO, listOf(LineaPedidoDTO(1,5,null,null,PizzaDTO(1,"Gambas",9.0,SIZE.GRANDE, listOf(Ingrediente(1,"Queso", listOf("Hola")))))))
-    val segundoPedido=PedidoDTO(34, LocalDateTime.now(),45.0,EstadoPedido.CANCELADO, listOf(LineaPedidoDTO(1,5,null,null,PizzaDTO(1,"Gambas",9.0,SIZE.GRANDE, listOf(Ingrediente(1,"Queso", listOf("Hola")))))))
-    val tercerPedido=PedidoDTO(67, LocalDateTime.now(),45.0,EstadoPedido.CANCELADO, listOf(LineaPedidoDTO(1,5,null,null,PizzaDTO(1,"Gambas",9.0,SIZE.GRANDE, listOf(Ingrediente(1,"Queso", listOf("Hola")))))))
+    val primerPedido=PedidoDTO(2, LocalDateTime.now(),45.0,EstadoPedido.CANCELADO, listOf(LineaPedidoDTO(1,5,null,null,null,PizzaDTO(1,"Gambas",9.0,SIZE.GRANDE, listOf(Ingrediente(1,"Queso", listOf("Hola")))))))
+    val segundoPedido=PedidoDTO(34, LocalDateTime.now(),45.0,EstadoPedido.CANCELADO, listOf(LineaPedidoDTO(1,5,null,null,null,PizzaDTO(1,"Gambas",9.0,SIZE.GRANDE, listOf(Ingrediente(1,"Queso", listOf("Hola")))))))
+    val tercerPedido=PedidoDTO(67, LocalDateTime.now(),45.0,EstadoPedido.CANCELADO, listOf(LineaPedidoDTO(1,5,null,null,null,PizzaDTO(1,"Gambas",9.0,SIZE.GRANDE, listOf(Ingrediente(1,"Queso", listOf("Hola")))))))
 
 
     val clienteUno = ClienteDTO(7,"12345678I","Rafe","calle calle","123456789","correo@gmail.com","1234",listaPedidos)
 
     listaPedidos.addAll(listOf(primerPedido,segundoPedido,tercerPedido))
 
-
-    println(clienteUno)
-
-
-
-
-
+    //println(clienteUno)
 
     //Lista con pizzas ingredientes y alergenos
     val listaPizzas: List<PizzaDTO> = mutableListOf(
@@ -76,21 +69,21 @@ fun main() {
         PizzaDTO(
             4,
             "Pizza Atuzn",
-            6.0,
+            16.0,
             SIZE.GRANDE,
             listOf(Ingrediente(1, "Gamba", listOf("Glutoma")),Ingrediente(1, "Kebab", listOf("Cancer", "Gluten")),Ingrediente(1, "Kebab", listOf("Cancer", "Gluten")))
         ),
         PizzaDTO(
             4,
             "Vegana",
-            6.0,
+            76.0,
             SIZE.GRANDE,
             listOf(Ingrediente(1, "Cebolla", listOf("Glutoma")))
         ),
         PizzaDTO(
             4,
             "Vegana",
-            6.0,
+            11.0,
             SIZE.GRANDE,
             listOf(Ingrediente(1, "Pimiento", listOf("Glutoma")))
         )
@@ -100,7 +93,7 @@ fun main() {
     //Cliente no puede comer ingreditnes con estos alergenos:
     val listaAlergenos: List<String> =
         mutableListOf("Gluten", "Glutoma", "Cancer", "AlergenoUno", "AlergenoDos")
-
+    //val listaAlergenos:List<String> = listOf()
     //Creamos una lista de ingredientes:
     val listaingr: List<Ingrediente> = listOf(
         Ingrediente(1, "Kebab", listOf("Cancer", "Gluten")),
@@ -116,73 +109,105 @@ fun main() {
 
     //Probamos flitrado por precios:
     println("Filtramos por precio: ")
-    println(control.filtradoDePizzas(listaPizzas, 10, 12))
+    println(control.filtradoDePizzasDos(listaPizzas, 1, 20,SIZE.GRANDE))
     println(guines)
 
 
     //Probamos filtrado por alergenos:
     println("Filtramos ingredientes que podemos consumir: ")
-    println(control.filtradoDeIngredientes(listaAlergenos, listaingr))
+    println(control.filtradoDeIngredientesDevuelvePizzas(listaAlergenos,listaPizzas))
     println(guines)
 
 
-    //Probamos filtrado por alergenos:
-    println("Filtramos Precios ASC: ")
-    println(control.ordenarPizzasPrecio(true, listaPizzas))
-    println("Filtramos Precios DESC: ")
-    println(control.ordenarPizzasPrecio(false, listaPizzas))
-    println(guines)
+//    //Probamos filtrado por alergenos:
+//    println("Filtramos Precios ASC: ")
+//    println(control.ordenarPizzasPrecio(true, listaPizzas))
+//    println("Filtramos Precios DESC: ")
+//    println(control.ordenarPizzasPrecio(false, listaPizzas))
+//    println(guines)
 
     //Probamos contar pizzas
-    println("Porbamos haber cuantas pizzas tienen un ingrediente que le pasas: ")
-    println(control.contarPizzasPorIngrediente(listaingr.get(0), listaPizzas))
-    println(control.contarPizzasPorIngrediente(listaingr.get(3), listaPizzas))
-    println(control.contarPizzasPorIngrediente(listaingr.get(2), listaPizzas))
-
-    //Probamos contar pizzas
-    println("Otra forma: ")
-    println(control.contarPizzasPorIngredienteDos(listaingr[0], listaPizzas))
-    println(control.contarPizzasPorIngredienteDos(listaingr[1], listaPizzas))
-    println(control.contarPizzasPorIngredienteDos(listaingr[2], listaPizzas))
+//    println("Porbamos haber cuantas pizzas tienen un ingrediente que le pasas: ")
+//    println(control.contarPizzasPorIngrediente(listaingr.get(0), listaPizzas))
+//    println(control.contarPizzasPorIngrediente(listaingr.get(3), listaPizzas))
+//    println(control.contarPizzasPorIngrediente(listaingr.get(2), listaPizzas))
+//
+//    //Probamos contar pizzas
+//    println("Otra forma: ")
+//    println(control.contarPizzasPorIngredienteDos(listaingr[0], listaPizzas))
+//    println(control.contarPizzasPorIngredienteDos(listaingr[1], listaPizzas))
+//    println(control.contarPizzasPorIngredienteDos(listaingr[2], listaPizzas))
 
     //Devolvemos pizzas pa:
-    println(control.filtradoPorTamanyo(listaPizzas,SIZE.GRANDE))
-    println()
-    //Devolvemos pizzas por nombre:
-    println(control.filtradoPorNombreDeLaPizza(listaPizzas,"Pizza Kebab"))
-    println()
-    //Devolvemos pizzas con ingredientes contados:
-    println(control.filtradoPorNumeroDeIngredientes(listaPizzas,2))
-    println()
-    println(control.filtradorPrecioPromedio(listaPizzas))
-
-    val listaVeganos:List<Ingrediente> = listOf(Ingrediente(2,"Zanahoria", listOf()),Ingrediente(2,"Cebolla", listOf()),Ingrediente(2,"Pimiento", listOf()))
-
-    println()
-    println(control.filtrarPizzasVeganas(listaPizzas,listaVeganos))
-
-
-    println()
-    println(control.filtradorPrecioMasAltoQuePromedio(listaPizzas))
-
-
-    println()
-    println(control.filtradoPizzaConMasIngredientes(listaPizzas))
-
-
-
-
-
+//    println(control.filtradoPorTamanyo(listaPizzas,SIZE.GRANDE))
+//    println()
+//    //Devolvemos pizzas por nombre:
+//    println(control.filtradoPorNombreDeLaPizza(listaPizzas,"Pizza Kebab"))
+//    println()
+//    //Devolvemos pizzas con ingredientes contados:
+//    println(control.filtradoPorNumeroDeIngredientes(listaPizzas,2))
+//    println()
+//    println(control.filtradorPrecioPromedio(listaPizzas))
+//
+//    val listaVeganos:List<Ingrediente> = listOf(Ingrediente(2,"Zanahoria", listOf()),Ingrediente(2,"Cebolla", listOf()),Ingrediente(2,"Pimiento", listOf()))
+//
+//    println()
+//    println(control.filtrarPizzasVeganas(listaPizzas,listaVeganos))
+//
+//
+//    println()
+//    println(control.filtradorPrecioMasAltoQuePromedio(listaPizzas))
+//
+//
+//    println()
+//    println(control.filtradoPizzaConMasIngredientes(listaPizzas))
+//
+//
+//
 
 }
 
 class Controlador {
-    //Primer metodo:
-    fun filtradoDePizzas(listaPizza: List<PizzaDTO>, min: Int = 7, max: Int = 10): List<PizzaDTO> {
-        return listaPizza.filter { it.precio >= min && it.precio < max }//implicita
+    //Ejercicios examen:
+    /**
+     * (2 puntos) El filtrado de las pizzas, además de los criterios actuales,
+     * también debe filtrar por tamaño y tendrá un valor por defecto
+     * (MEDIANA).
+     */
+    fun filtradoDePizzas(listaPizza: List<PizzaDTO>, min: Int = 7, max: Int = 10,tamanyo: SIZE=SIZE.MEDIANA): List<PizzaDTO> {
+        return listaPizza.filter { it.precio >= min && it.precio <= max && it.tamanyo == tamanyo }//implicita
         //return listaPizza.filter { pizza:PizzaDTO -> pizza.precio in min .. max }//explicita
     }
+    fun filtradoDePizzasDos(listaPizza: List<PizzaDTO>, min: Int = 5, max: Int = 100,tam: SIZE=SIZE.MEDIANA): List<PizzaDTO> {
+        return listaPizza.filter { it.precio >= min && it.precio <= max && it.tamanyo == tam }
 
+    }
+
+    /**
+     * (2 puntos) El filtrado de ingredientes por alérgenos cambia su tipo de
+     * retorno, de manera que, dada una lista de alérgenos, devuelva aquellas
+     * pizzas que no contengan ninguno de esos alérgenos. Además, se tiene
+     * que poder invocar la función sin alérgenos.
+     */
+    fun filtradoDeIngredientesDevuelvePizzas(listaAlergenos: List<String>, listaPizzas:List<PizzaDTO>): List<PizzaDTO> {
+        return if (listaAlergenos.isEmpty()) listaPizzas else listaPizzas.filter { it.listaIngredientesPizza.all { it.alergenos.none() {it in listaAlergenos} } }
+    }
+
+    /**
+     * (2 puntos) Crea una función que combine las funciones anteriores
+     * llamada obtenerPizzasPersonalizadas. Esta función debe, por un lado,
+     * filtrar las pizzas por tamaño y precio, y, por otro lado, también debe
+     * filtrar por alérgenos. Esta función también debe tener valores por
+     * defecto para el tamaño, mínimo precio, máximo precio y alérgenos.
+     */
+
+//    fun obtenerPizzasPersonalizadas(tamany:SIZE=SIZE.MEDIANA, minim:Int=5, maxim:Int=20,listaPizza:List<PizzaDTO>,alergens:List<String>):List<PizzaDTO>{
+//        return filtradoDePizzasDos(listaPizza,minim,maxim,tamany) && filtradoDeIngredientesDevuelvePizzas(alergens,listaPizza)
+//    }
+
+
+
+    //Primer metodo:
     //Segundo metodo:
     /**
      * filtrarIngredientes debe filtrar cualquier ingrediente que contenga algún alérgeno,
@@ -198,6 +223,16 @@ class Controlador {
     ): List<Ingrediente> {
         return listaIngredientes.filter { it.alergenos.none() { it in listaAlergenos } }
     }
+
+
+
+
+
+
+
+
+
+
 
     //Otras formas de hacerlo la que uso en mi punto de vista es la mas sencilla.
     //return listaIngredientes.filter{it.alergenos.all { it !in listaAlergenos }}
@@ -225,6 +260,17 @@ class Controlador {
      */
     // listaPizzasAFiltrar.filter {it.listaIngredientesPizza.all { it.nombre.equals(ingre) }}.count()
     //return listaPizzasAFiltrar.filter {it.listaIngredientesPizza.all { it.nombre.equals(ingre) }}.count()
+
+
+
+
+
+
+
+
+
+
+
 
 
     /**
