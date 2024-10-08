@@ -180,7 +180,6 @@ class Controlador {
     }
     fun filtradoDePizzasDos(listaPizza: List<PizzaDTO>, min: Int = 5, max: Int = 100,tam: SIZE=SIZE.MEDIANA): List<PizzaDTO> {
         return listaPizza.filter { it.precio >= min && it.precio <= max && it.tamanyo == tam }
-
     }
 
     /**
@@ -201,9 +200,9 @@ class Controlador {
      * defecto para el tamaño, mínimo precio, máximo precio y alérgenos.
      */
 
-//    fun obtenerPizzasPersonalizadas(tamany:SIZE=SIZE.MEDIANA, minim:Int=5, maxim:Int=20,listaPizza:List<PizzaDTO>,alergens:List<String>):List<PizzaDTO>{
-//        return filtradoDePizzasDos(listaPizza,minim,maxim,tamany) && filtradoDeIngredientesDevuelvePizzas(alergens,listaPizza)
-//    }
+    fun obtenerPizzasPersonalizadas(tamany:SIZE=SIZE.MEDIANA, minim:Int=5, maxim:Int=20,listaPizza:List<PizzaDTO>,alergens:List<String>):List<PizzaDTO>{
+        return filtradoDePizzasDos(filtradoDeIngredientesDevuelvePizzas(alergens,listaPizza),minim,maxim,tamany)
+    }
 
 
 
@@ -223,8 +222,6 @@ class Controlador {
     ): List<Ingrediente> {
         return listaIngredientes.filter { it.alergenos.none() { it in listaAlergenos } }
     }
-
-
 
 
 
